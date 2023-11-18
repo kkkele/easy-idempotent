@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.superkele</groupId>
+    <groupId>io.github.kkkele</groupId>
     <artifactId>easy-idempotent</artifactId>
     <version>${revision}</version>
 
@@ -14,7 +14,6 @@
     <modules>
         <module>easy-idempotent-core</module>
         <module>easy-idempotent-spring-boot-starter</module>
-        <module>demo</module>
     </modules>
 
 
@@ -58,13 +57,13 @@
             </dependency>
 
             <dependency>
-                <groupId>com.superkele</groupId>
+                <groupId>io.github.kkkele</groupId>
                 <artifactId>easy-idempotent-core</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.superkele</groupId>
+                <groupId>io.github.kkkele</groupId>
                 <artifactId>easy-idempotent-spring-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
