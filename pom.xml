@@ -8,6 +8,32 @@
     <artifactId>easy-idempotent</artifactId>
     <version>${revision}</version>
 
+    <description>幂等框架</description>
+    <url>https://github.com/kkkele/easy-idempotent</url>
+
+    <developers>
+        <developer>
+            <id>kkkele</id>
+            <name>kkkele</name>
+            <email>1622011654@qq.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <!--开源协议...-->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+
     <packaging>pom</packaging>
 
 
@@ -20,6 +46,9 @@
 
     <properties>
         <revision>1.0.0</revision>
+        <!-- 插件版本 -->
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +57,7 @@
         <hutool.version>5.8.18</hutool.version>
         <redisson.version>3.20.1</redisson.version>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
@@ -70,6 +100,24 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <!--这两个id需要和setting.xml文件中的server字段的id进行对应-->
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <url>https://github.com/kkkele/easy-idempotent</url>
+        <connection>https://github.com/kkkele/easy-idempotent.git</connection>
+        <developerConnection>https://github.com/kkkele</developerConnection>
+    </scm>
 
     <build>
         <plugins>

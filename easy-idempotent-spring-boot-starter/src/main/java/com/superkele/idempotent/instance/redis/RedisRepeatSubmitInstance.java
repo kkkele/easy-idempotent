@@ -2,27 +2,13 @@ package com.superkele.idempotent.instance.redis;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.superkele.idempotent.core.RepeatSubmit;
-import com.superkele.idempotent.exception.RedisDurableException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-
 import java.util.concurrent.TimeUnit;
 
 public class RedisRepeatSubmitInstance implements RepeatSubmit {
 
-    private static RedisTemplate client;
-    private static Logger logger = LoggerFactory.getLogger(RedisRepeatSubmitInstance.class);
-
-    static {
-        try {
-            client = SpringUtil.getBean(StringRedisTemplate.class);
-        } catch (Exception e) {
-            logger.error("[EASY-IDEMPOTENT]使用REDIS持久化模式，请先配置REDIS");
-            throw new RedisDurableException();
-        }
-    }
+    private static final RedisTemplate CLIENT = SpringUtil.getBean(StringRedisTemplate.class);
 
     private String key;
 
@@ -32,12 +18,12 @@ public class RedisRepeatSubmitInstance implements RepeatSubmit {
 
     @Override
     public void setValue(String key, String value, long interval) {
-        client.opsForValue().set(key, value, interval, TimeUnit.MILLISECONDS);
+        CLIENT.opsForValue().set(key, value, interval, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public String getValue() {
-        return (String) client.opsForValue().get(getKey());
+        return (String) CLIENT.opsForValue().get(getKey());
     }
 
     @Override
@@ -52,13 +38,12 @@ public class RedisRepeatSubmitInstance implements RepeatSubmit {
 
     @Override
     public Boolean predict(long interval) {
-        Boolean b = client.opsForValue().setIfAbsent(getKey(), "", interval, TimeUnit.MILLISECONDS);
+        Boolean b = CLIENT.opsForValue().setIfAbsent(getKey(), "", interval, TimeUnit.MILLISECONDS);
         return b != null && b;
     }
 
     @Override
     public void beforeHandle(long interval) {
-        // ....
     }
 
 
@@ -69,7 +54,6 @@ public class RedisRepeatSubmitInstance implements RepeatSubmit {
 
     @Override
     public void afterHandler(Boolean flag) {
-        //...
         if (flag) {
             clean();
         }
@@ -77,6 +61,6 @@ public class RedisRepeatSubmitInstance implements RepeatSubmit {
 
     @Override
     public void clean() {
-        client.delete(getKey());
+        CLIENT.delete(getKey());
     }
 }

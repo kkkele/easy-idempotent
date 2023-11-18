@@ -10,6 +10,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/easy-idempotent-demo/pom.xml" />
         <option value="$PROJECT_DIR$/redisson-easy-idempotent/pom.xml" />
       </set>

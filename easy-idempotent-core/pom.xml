@@ -9,6 +9,8 @@
         <version>${revision}</version>
     </parent>
 
+    <packaging>jar</packaging>
+
     <artifactId>easy-idempotent-core</artifactId>
 
     <properties>
@@ -36,5 +38,6 @@
 
 
     </dependencies>
+
 
 </project>

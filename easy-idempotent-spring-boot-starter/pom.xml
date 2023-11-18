@@ -9,6 +9,8 @@
         <version>${revision}</version>
     </parent>
 
+    <packaging>jar</packaging>
+
     <artifactId>easy-idempotent-spring-boot-starter</artifactId>
 
     <properties>
@@ -58,5 +60,7 @@
 
 
     </dependencies>
+
+
 
 </project>
