@@ -195,7 +195,7 @@ GET http://localhost:8080/idempotent/demo3?id=2&title=testdemo3
 
 多次请求日志打印情况
 
-![image](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119135650547.png)
+![image-20231119135650547](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119135650547.png)
 
 3.混合使用幂等标识type，自定义幂等标识
 
@@ -262,7 +262,7 @@ public class RepeatTokenImpl implements RepeatToken {
 
    日志信息
 
-   ![image-20231119143557118](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119143557118.png)![image-20231119143618298](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119143618298.png)
+   ![image-20231119143557118](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119143557118.png)![image-20231119143618298](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119143618298.png)
 
 ​		 可以看到，在消息消费失败后，仍然可以再次消费，以保证mq能够正常工作
 
