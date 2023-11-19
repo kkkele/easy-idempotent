@@ -171,7 +171,7 @@ easyIdempotent 一款配置简单，只需要打上注解就可轻松实现幂�
 
 ​		日志打印信息
 
-![image-20231119135158216](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119135158216.png)
+![image](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/blob/master/imgs/image-20231119135650547.png)
 
 2.使用spel表达式自定义幂等标识的组成
 
@@ -195,7 +195,7 @@ GET http://localhost:8080/idempotent/demo3?id=2&title=testdemo3
 
 多次请求日志打印情况
 
-![image-20231119135650547](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119135650547.png)
+![image](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119135650547.png)
 
 3.混合使用幂等标识type，自定义幂等标识
 
@@ -221,7 +221,7 @@ public class RepeatTokenImpl implements RepeatToken {
 
 日志打印情况
 
-![image-20231119140132038](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119140132038.png)
+![image-20231119140132038](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119140132038.png)
 
 4. mq场景下使用 (清理策略不适用于Mq场景)
 
@@ -262,12 +262,12 @@ public class RepeatTokenImpl implements RepeatToken {
 
    日志信息
 
-   ![image-20231119143557118](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119143557118.png)![image-20231119143618298](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119143618298.png)
+   ![image-20231119143557118](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119143557118.png)![image-20231119143618298](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119143618298.png)
 
 ​		 可以看到，在消息消费失败后，仍然可以再次消费，以保证mq能够正常工作
 
 ​		本组件在消息消费成功后，会将mq场景下的幂等标识对应的值改为 1
 
-![image-20231119143748522](C:\Users\16220\AppData\Roaming\Typora\typora-user-images\image-20231119143748522.png)
+![image-20231119143748522](https://gitee.com/cai-zhiyuDaKeLe/easy-idempotent/raw/master/imgs/image-20231119143748522.png)
 
 ​		这样，如果发生了极端情况的重复消费，本组件会跳过之后的消费来保证mq场景下的幂等性
