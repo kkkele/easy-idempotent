@@ -67,6 +67,14 @@ public class RepeatProperties {
             this.message = message;
         }
 
+        public void setInterval(String interval) {
+            this.interval = interval;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
         public String getInterval() {
             return interval;
         }

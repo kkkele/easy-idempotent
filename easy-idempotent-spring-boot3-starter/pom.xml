@@ -3,13 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.kkkele</groupId>
+        <artifactId>easy-idempotent</artifactId>
+        <version>1.0.1</version>
+    </parent>
 
-    <groupId>io.github.kkkele</groupId>
-    <artifactId>easy-idempotent</artifactId>
-    <version>1.0.1</version>
+    <packaging>jar</packaging>
 
-    <name>easy-idempotent</name>
-    <description>幂等框架</description>
+    <artifactId>easy-idempotent-spring-boot3-starter</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <description>幂等框架 spring-boot-starter</description>
+
     <url>https://github.com/kkkele/easy-idempotent</url>
 
     <developers>
@@ -34,74 +45,6 @@
         </license>
     </licenses>
 
-
-    <packaging>pom</packaging>
-
-
-    <modules>
-        <module>easy-idempotent-core</module>
-        <module>easy-idempotent-spring-boot3-starter</module>
-    </modules>
-
-
-
-    <properties>
-        <revision>1.0.1</revision>
-        <!-- 插件版本 -->
-        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
-        <spring-boot.version>3.0.6</spring-boot.version>
-        <hutool.version>5.8.18</hutool.version>
-        <redisson.version>3.20.1</redisson.version>
-    </properties>
-
-
-    <dependencyManagement>
-        <dependencies>
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!--redisson-->
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>${redisson.version}</version>
-            </dependency>
-
-
-            <!--工具类-->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.kkkele</groupId>
-                <artifactId>easy-idempotent-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.kkkele</groupId>
-                <artifactId>easy-idempotent-spring-boot3-starter</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
-
     <distributionManagement>
         <repository>
             <!--这两个id需要和setting.xml文件中的server字段的id进行对应-->
@@ -120,9 +63,51 @@
         <developerConnection>https://github.com/kkkele</developerConnection>
     </scm>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.kkkele</groupId>
+            <artifactId>easy-idempotent-core</artifactId>
+        </dependency>
+
+        <!-- aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!--  自动生成YML配置关联JSON文件  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-properties-migrator</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
     <build>
         <plugins>
-            <!-- 统一版本号管理 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -132,6 +117,26 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -152,7 +157,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>
