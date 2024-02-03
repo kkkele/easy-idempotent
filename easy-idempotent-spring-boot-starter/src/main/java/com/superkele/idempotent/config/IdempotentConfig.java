@@ -16,8 +16,6 @@ public class IdempotentConfig {
 
     private static Logger logger = LoggerFactory.getLogger(IdempotentConfig.class);
 
-
-
     @Bean
     public IdempotentAspect idempotentLogAspect(RepeatProperties properties) {
         logger.info("\u001B[32m" + "[EASY-IDEMPOTENT]加载完毕[{}]" + "\u001B[0m", properties);
