@@ -23,45 +23,6 @@
 
     <url>https://github.com/kkkele/easy-idempotent</url>
 
-    <developers>
-        <developer>
-            <id>kkkele</id>
-            <name>kkkele</name>
-            <email>1622011654@qq.com</email>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
-
-<!--    &lt;!&ndash;开源协议...&ndash;&gt;
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <distributionManagement>
-        <repository>
-            &lt;!&ndash;这两个id需要和setting.xml文件中的server字段的id进行对应&ndash;&gt;
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <scm>
-        <url>https://github.com/kkkele/easy-idempotent</url>
-        <connection>https://github.com/kkkele/easy-idempotent.git</connection>
-        <developerConnection>https://github.com/kkkele</developerConnection>
-    </scm>-->
 
     <dependencyManagement>
         <dependencies>

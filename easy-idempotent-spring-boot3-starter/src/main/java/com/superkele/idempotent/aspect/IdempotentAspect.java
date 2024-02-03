@@ -21,24 +21,26 @@ import org.springframework.boot.convert.DurationStyle;
 import java.util.function.Supplier;
 
 @Aspect
-public class IdempotentLogAspect {
+public class IdempotentAspect {
 
     public static RepeatProperties properties;
-    private static Logger logger = LoggerFactory.getLogger(IdempotentLogAspect.class);
+    private static Logger logger = LoggerFactory.getLogger(IdempotentAspect.class);
 
-    public IdempotentLogAspect(RepeatProperties properties) {
+    public IdempotentAspect(RepeatProperties properties) {
         this.properties = properties;
     }
 
 
     private static void printLog(JoinPoint joinPoint, String logContent, Supplier... methods) {
-        Object[] params = new Object[methods.length];
-        for (int i = 0; i < params.length; i++) {
-            params[i] = methods[i].get();
+        if (properties.getEnableLog()) {
+            Object[] params = new Object[methods.length];
+            for (int i = 0; i < params.length; i++) {
+                params[i] = methods[i].get();
+            }
+            String targetMethod = genTargetMethod(joinPoint);
+            String content = targetMethod + "=>" + logContent;
+            logger.info("\u001B[32m" + content + "\u001B[0m", params);
         }
-        String targetMethod = genTargetMethod(joinPoint);
-        String content = targetMethod + "=>" + logContent;
-        logger.info("\u001B[32m" + content + "\u001B[0m", params);
     }
 
     private static String genTargetMethod(JoinPoint joinPoint) {

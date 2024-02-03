@@ -2,7 +2,7 @@ package com.superkele.idempotent.decorate.scene;
 
 import cn.hutool.core.text.StrBuilder;
 import com.superkele.idempotent.annotations.Idempotent;
-import com.superkele.idempotent.aspect.IdempotentLogAspect;
+import com.superkele.idempotent.aspect.IdempotentAspect;
 import com.superkele.idempotent.core.RepeatSubmit;
 import com.superkele.idempotent.decorate.AbstractIdempotentDecorator;
 import com.superkele.idempotent.decorate.RepeatSubmitWrapper;
@@ -52,9 +52,9 @@ public class MqRepeatSubmit extends AbstractIdempotentDecorator {
     public void afterHandler(Boolean flag) {
         Idempotent idempotent = wrapper.getIdempotent();
         long interval = (idempotent.interval() < 0) ? switch (idempotent.scene()) {
-            case MQ -> DurationStyle.detectAndParse(IdempotentLogAspect.properties.getMq().getInterval()).toMillis();
+            case MQ -> DurationStyle.detectAndParse(IdempotentAspect.properties.getMq().getInterval()).toMillis();
             case RESTAPI ->
-                    DurationStyle.detectAndParse(IdempotentLogAspect.properties.getRestApi().getInterval()).toMillis();
+                    DurationStyle.detectAndParse(IdempotentAspect.properties.getRestApi().getInterval()).toMillis();
         } : idempotent.timeUnit().toMillis(idempotent.interval());
         setValue(getKey(), CONSUME_OVER, interval);
 

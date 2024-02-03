@@ -9,8 +9,8 @@
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.superkele</groupId>
     <artifactId>easy-idempotent-spring-boot-starter</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
