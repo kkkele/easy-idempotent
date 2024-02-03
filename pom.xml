@@ -6,7 +6,7 @@
 
     <groupId>io.github.kkkele</groupId>
     <artifactId>easy-idempotent</artifactId>
-    <version>1.0.1</version>
+    <version>${revision}</version>
 
     <name>easy-idempotent</name>
     <description>幂等框架</description>
@@ -41,36 +41,30 @@
     <modules>
         <module>easy-idempotent-core</module>
         <module>easy-idempotent-spring-boot3-starter</module>
+        <module>easy-idempotent-spring-boot-starter</module>
     </modules>
 
 
 
     <properties>
-        <revision>1.0.1</revision>
+        <revision>1.0.2</revision>
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
-        <spring-boot.version>3.0.6</spring-boot.version>
+        <spring-boot3.version>3.0.6</spring-boot3.version>
+        <spring-boot.version>2.7.6</spring-boot.version>
         <hutool.version>5.8.18</hutool.version>
         <redisson.version>3.20.1</redisson.version>
+        <javax-api.version>4.0.1</javax-api.version>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
-
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 
             <!--redisson-->
             <dependency>
@@ -120,9 +114,35 @@
         <developerConnection>https://github.com/kkkele</developerConnection>
     </scm>
 
+
     <build>
         <plugins>
             <!-- 统一版本号管理 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -132,6 +152,26 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>

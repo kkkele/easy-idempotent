@@ -15,7 +15,7 @@ public interface RepeatSubmit {
 
 
     /**
-     * 获取 幂等标识
+     * 获取 幂等标识   // (幂等标识): 幂等标识的值
      *
      * @return
      */
@@ -29,7 +29,6 @@ public interface RepeatSubmit {
      * @param interval 多少 ms 内不能重复提交
      */
     Boolean predict(long interval);
-
 
     /**
      * 前置处理

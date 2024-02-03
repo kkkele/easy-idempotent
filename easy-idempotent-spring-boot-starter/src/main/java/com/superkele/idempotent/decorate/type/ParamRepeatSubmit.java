@@ -3,11 +3,11 @@ package com.superkele.idempotent.decorate.type;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.json.JSONUtil;
 import com.superkele.idempotent.decorate.AbstractIdempotentDecorator;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
