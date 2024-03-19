@@ -84,7 +84,11 @@ public class IdempotentAspect {
         } catch (Throwable e) {
             repeatSubmit.exHandle();
             printLog(joinPoint, "幂等标识{}执行业务异常处理器", () -> repeatSubmit.getKey());
-            throw new RuntimeException(e);
+            try {
+                throw e;
+            } catch (Throwable ex) {
+                throw new RuntimeException(ex);
+            }
         } finally {
             //....
         }
