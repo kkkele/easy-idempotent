@@ -50,7 +50,7 @@ public class IdempotentAspect {
     }
 
     @Around("@annotation(idempotent)")
-    public Object idempotentHandler(ProceedingJoinPoint joinPoint, Idempotent idempotent) {
+    public Object idempotentHandler(ProceedingJoinPoint joinPoint, Idempotent idempotent) throws Throwable {
         RepeatSubmit repeatSubmit = IdempotentUtils.getInstance(idempotent, joinPoint, properties.getUsingType(), properties.getPrefix());
         Object resultObj = null;
         try {
@@ -84,11 +84,7 @@ public class IdempotentAspect {
         } catch (Throwable e) {
             repeatSubmit.exHandle();
             printLog(joinPoint, "幂等标识{}执行业务异常处理器", () -> repeatSubmit.getKey());
-            try {
-                throw e;
-            } catch (Throwable ex) {
-                throw new RuntimeException(ex);
-            }
+            throw e;
         } finally {
             //....
         }
